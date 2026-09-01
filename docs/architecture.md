@@ -85,13 +85,15 @@ The intended application database role is:
 
 Migrations and seed operations use a separate owner connection. This separation prevents ordinary application code from silently escaping the same policies it is meant to exercise.
 
-### Why some registries are different
+### Resolving identity before a normal tenant query
 
-A few records must be read before a tenant context exists. The canonical host registry is needed to resolve browser requests, and the MCP credential/token registries are needed to resolve an agent principal.
+Some lookups occur at the point where tenant identity is being discovered.
 
-Those registries cannot depend on a project context that has not yet been discovered. They are therefore handled through narrow stores that require project filters for administrative operations and validate project status, credential status, expiry and stored hashes during token issuance or resolution.
+The browser path uses a narrow canonical-host registry before it can create a project context. The MCP path uses tenant-bound client and token identifiers differently: it validates the tenant portion first, establishes a project-scoped transaction, and only then looks up the hashed credential or access-token record.
 
-This is a deliberate exception, not an assumption that all tables share the same access path.
+The current migrations enable and force RLS on MCP credential, access-token and upload-ticket tables as well. The tenant-bound identifier makes that possible without storing or trusting the raw secret as project authority.
+
+This is a deliberate part of the identity design, not an assumption that authentication tables should bypass tenant controls.
 
 ## Defense in depth
 
