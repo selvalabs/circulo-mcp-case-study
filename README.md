@@ -78,3 +78,7 @@ See [Testing the boundary](docs/testing.md) for the evidence model and its limit
 This case reflects behavior implemented and tested in the current private development version reviewed on **September 1, 2026**.
 
 It is not a claim of completed production readiness, formal verification, third-party security review, or compatibility with every MCP client. The public repository is deliberately narrower than the product: it explains the authorization model and the evidence behind it without publishing the application itself.
+
+## Author
+
+Built and documented by [Carlos Selva](https://github.com/selvalabs).
