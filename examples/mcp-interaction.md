@@ -56,16 +56,12 @@ Reduced response:
       "tools": {
         "listChanged": false
       }
-    },
-    "serverInfo": {
-      "name": "circulo-mcp",
-      "version": "0.1.0"
     }
   }
 }
 ```
 
-The real implementation also returns project metadata derived from the authenticated principal. It is omitted here because the example does not need a concrete tenant identifier.
+The real implementation also returns server and project metadata. They are omitted here because the example does not need a concrete internal server name or tenant identifier.
 
 ## 3. Discover tools
 
