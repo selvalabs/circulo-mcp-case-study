@@ -1,0 +1,22 @@
+name: Validate public case study
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate publication boundary and links
+        run: python scripts/validate_public_case.py
+
+      - name: Check whitespace
+        run: git diff --check
